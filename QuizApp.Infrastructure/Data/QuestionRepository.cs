@@ -7,46 +7,57 @@ using QuizApp.Core.Services;
 
 namespace QuizApp.Infrastructure.Data
 {
-    public class QuestionRepository 
+    public class QuestionRepository :IQuestionRepository
     {
         // TODO: inherit and implement the IQuestionRepository interface
+        private readonly AppDbContext _DbContext;
 
-        public QuestionRepository() 
+        public QuestionRepository(AppDbContext DbContext)
         {
-            // TODO: inject and store AppDbContext
+            _DbContext = DbContext;
         }
 
-        // TODO: The Update() method needs some special logic that you have not seen before.
-        // It will update the Question AND also update all of the related Answers. Here is
-        // the implementation for Update:
-        //public Question Update(Question updatedItem)
-        //{
-        //    // retrieve the existing question
-        //    var existingItem = this.Get(updatedItem.Id);
-        //    if (existingItem == null) return null;
+        public Question Add(Question question)
+        {
+            _DbContext.Question.Add(question);
+            _DbContext.SaveChanges();
+            return question;
+        }
 
-        //    // copy updated property values into the existing question
-        //    _dbContext.Entry(existingItem)
-        //       .CurrentValues
-        //       .SetValues(updatedItem);
+        public Question Get(int id)
+        {
+            return _DbContext.Question
+                .SingleOrDefault(u => u.Id == id);
+        }
 
-        //    // loop thru all of the answers in the updated question
-        //    foreach (var updatedAnswer in updatedItem.Answers)
-        //    {
-        //        // find the existing answer that corresponds to the updated answer
-        //        var existingAnswer = existingItem.Answers
-        //        .Where(a => a.Id == updatedAnswer.Id)
-        //        .SingleOrDefault();
-        //        // update existing answer from updated answer
-        //        _dbContext.Entry(existingAnswer)
-        //            .CurrentValues
-        //            .SetValues(updatedAnswer);
-        //    }
+        public IEnumerable<Question> GetAll()
+        {
+            return _DbContext.Question
+                .ToList();
+        }
 
-        //    // save all the changes
-        //    _dbContext.Questions.Update(existingItem);
-        //    _dbContext.SaveChanges();
-        //    return existingItem;
-        //}
+        public Question Update(Question question)
+        {
+            var currentQuestion = _DbContext.Question.Find(updatedQuestion.Id);
+
+            // return null if todo to update isn't found
+            if (currentQuestion == null) return null;
+
+            _DbContext.Entry(currentQuestion)
+                .CurrentValues
+                .SetValues(updatedQuestion);
+
+            // update the todo and save
+            _DbContext.Question.Update(currentQuestion);
+            _DbContext.SaveChanges();
+            return currentQuestion;
+        }
+
+        public void Remove(Question question)
+        {
+            _DbContext.Question.Remove(question);
+            _DbContext.SaveChanges();
+        }
+
     }
 }
