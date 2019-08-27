@@ -5,7 +5,7 @@ namespace QuizApp.Core.Models
 {
     public class Question 
     {
-        public int Id { get; set; }
+        public int Id { get; private set; }
         public string QuestionType { get; set; }
         public string Prompt { get; set; }
         public ICollection<Answer> Answers { get; set; }
