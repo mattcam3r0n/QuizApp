@@ -18,11 +18,11 @@ namespace QuizApp.Infrastructure.Data
 
 
 
-        public Quiz Add(Quiz entity)
+        public Quiz Add(Quiz quiz)
         {
-            _DbContext.Quiz.Add(Quiz);
+            _DbContext.Quiz.Add(quiz);
             _DbContext.SaveChanges();
-            return Quiz;
+            return quiz;
         }
 
         public Quiz Get(int id)
@@ -37,13 +37,13 @@ namespace QuizApp.Infrastructure.Data
                 .ToList();
         }
 
-        public void Remove(Quiz entity)
+        public void Remove(Quiz quiz)
         {
-            _DbContext.Quiz.Remove(Quiz);
+            _DbContext.Quiz.Remove(quiz);
             _DbContext.SaveChanges();
         }
 
-        public Quiz Update(Quiz entity)
+        public Quiz Update(Quiz updatedQuiz)
         {
             var currentQuiz = _DbContext.Quiz.Find(updatedQuiz.Id);
 
