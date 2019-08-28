@@ -6,12 +6,12 @@ namespace QuizApp.ApiModels
     
     public class QuizModel
     {
-      public int Id { get; set; }
-     public string Title { get; set; }
-    public string Description { get; set; }
-    public string Instructions { get; set; }
-    public IEnumerable<QuestionModel> Questions { get; set; }
-        public QuizModel(int Id, string Title, string Description, string Instructions, IEnumerable<QuestionModel>Questions)
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string Instructions { get; set; }
+        public IEnumerable<QuestionModel> Questions { get; set; }
+            public static QuizModel(QuizApp.Quiz quiz)
         {
             this.Id = Id;
             this.Title = Title;
