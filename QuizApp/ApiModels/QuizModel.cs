@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuizApp.Core.Models;
+using System;
 using System.Collections.Generic;
 
 namespace QuizApp.ApiModels

@@ -12,7 +12,11 @@ namespace QuizApp.Controllers
 
         private readonly IQuizService _quizService;
 
-        // TODO: create a constructor and inject quiz service
+        // Done: create a constructor and inject quiz service
+        public QuizzesController(IQuizService quizService)
+        {
+            this._quizService = quizService;
+        }
 
         [HttpGet()]
         public IActionResult GetQuizzes()
