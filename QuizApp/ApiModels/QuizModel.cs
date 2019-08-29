@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuizApp.Core.Models;
+using System;
 using System.Collections.Generic;
 
 namespace QuizApp.ApiModels
@@ -11,7 +12,7 @@ namespace QuizApp.ApiModels
         public string Description { get; set; }
         public string Instructions { get; set; }
         public IEnumerable<QuestionModel> Questions { get; set; }
-            public static QuizModel(QuizApp.Quiz quiz)
+        public QuizModel(Quiz quiz)
         {
             this.Id = Id;
             this.Title = Title;
@@ -19,5 +20,5 @@ namespace QuizApp.ApiModels
             this.Instructions = Instructions;
             this.Questions = Questions;
         }
-}
+    }
 }
