@@ -12,13 +12,5 @@ namespace QuizApp.ApiModels
         public string Description { get; set; }
         public string Instructions { get; set; }
         public IEnumerable<QuestionModel> Questions { get; set; }
-        public QuizModel(Quiz quiz)
-        {
-            this.Id = Id;
-            this.Title = Title;
-            this.Description = Description;
-            this.Instructions = Instructions;
-            this.Questions = Questions;
-        }
     }
 }

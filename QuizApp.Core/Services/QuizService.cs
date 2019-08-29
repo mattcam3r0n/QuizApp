@@ -18,6 +18,10 @@ namespace QuizApp.Core.Services
         {
             return _quizRepository.GetAll();
         }
+       
+   
+
+
         // PUSH YOURSELF FURTHER
         // TIPS:
         //    * You'll need the QuestionRepository in order to get the list of questions to randomly choose from. How do you inject it?
