@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuizApp.ApiModels;
+using QuizApp.Core.Models;
 using QuizApp.Core.Services;
 
 namespace QuizApp.Controllers
@@ -16,7 +17,7 @@ namespace QuizApp.Controllers
 
         public QuestionsController(IQuestionService questionservice)
         {
-            _questionService = quesitonService;
+            _questionService = questionservice;
         }
 
         [AllowAnonymous]
@@ -39,7 +40,7 @@ namespace QuizApp.Controllers
 
         [AllowAnonymous]
         [HttpGet("{id}")]
-        public IActionResult Get()
+        public IActionResult Get(int id)
         {
             try
             {
@@ -56,11 +57,11 @@ namespace QuizApp.Controllers
 
         
         [HttpPost]
-        public IActionResult Add()
+        public IActionResult Add(Question question)
         {
             try
             {
-
+                return Ok(_questionService.Add(question));
             }
             catch (Exception)
             {
@@ -71,11 +72,11 @@ namespace QuizApp.Controllers
 
         
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] QuestionModel questionModel)
+        public IActionResult Update(int id, [FromBody] Question question)
         {
             try
             {
-                return Ok(_questionService.Update(updatedQuestion).ToApiModel());
+                return Ok(_questionService.Update(question).ToApiModel());
             }
             catch (Exception)
             {
@@ -86,11 +87,14 @@ namespace QuizApp.Controllers
 
         
         [HttpDelete]
-        public IActionResult Remove()
+        public IActionResult Remove(int id)
         {
             try
             {
-                _questionService.Remove(question);
+                var Q = _questionService.Get(id);
+                if (Q == null) return NotFound();
+                _questionService.Remove(Q.Id);
+                return NoContent();
             }
             catch (Exception)
             {
