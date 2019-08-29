@@ -19,26 +19,26 @@ namespace QuizApp.Infrastructure.Data
 
         public Question Add(Question question)
         {
-            _DbContext.Question.Add(question);
+            _DbContext.Questions.Add(question);
             _DbContext.SaveChanges();
             return question;
         }
 
         public Question Get(int id)
         {
-            return _DbContext.Question
+            return _DbContext.Questions
                 .SingleOrDefault(u => u.Id == id);
         }
 
         public IEnumerable<Question> GetAll()
         {
-            return _DbContext.Question
+            return _DbContext.Questions
                 .ToList();
         }
 
-        public Question Update(Question question)
+        public Question Update(Question updatedQuestion)
         {
-            var currentQuestion = _DbContext.Question.Find(updatedQuestion.Id);
+            var currentQuestion = _DbContext.Questions.Find(updatedQuestion.Id);
 
             // return null if todo to update isn't found
             if (currentQuestion == null) return null;
@@ -48,14 +48,14 @@ namespace QuizApp.Infrastructure.Data
                 .SetValues(updatedQuestion);
 
             // update the todo and save
-            _DbContext.Question.Update(currentQuestion);
+            _DbContext.Questions.Update(currentQuestion);
             _DbContext.SaveChanges();
             return currentQuestion;
         }
 
         public void Remove(Question question)
         {
-            _DbContext.Question.Remove(question);
+            _DbContext.Questions.Remove(question);
             _DbContext.SaveChanges();
         }
 
