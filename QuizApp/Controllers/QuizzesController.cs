@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
@@ -18,9 +19,6 @@ namespace QuizApp.Controllers
             this._quizService = quizService;
         }
         
-        
-        
-        
         [HttpGet("{id}")]
         public IActionResult GetQuizzes(IQuizService quizService)
         {
@@ -28,7 +26,7 @@ namespace QuizApp.Controllers
             // that will return quizzes from the database.
             try
             {
-                return (_quizService.GetAll());
+                return Ok(_quizService.GetAll());
             }
             catch (Exception)
             {
@@ -37,7 +35,6 @@ namespace QuizApp.Controllers
             }  
         }
         
-
         [HttpGet("{id}")]
         public IActionResult GetQuiz(int id)
         {
