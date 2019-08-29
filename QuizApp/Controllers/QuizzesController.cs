@@ -21,10 +21,10 @@ namespace QuizApp.Controllers
         
       
 
-        [HttpGet("{id}")]
+        [HttpGet()]
         public IActionResult GetQuizzes(IQuizService quizService)
         {
-            // TODO: replace the following code with a complete implementation
+            // Done: replace the following code with a complete implementation
             // that will return quizzes from the database.
             try
             {
@@ -41,16 +41,18 @@ namespace QuizApp.Controllers
         [HttpGet("{id}")]
         public IActionResult GetQuiz(int id)
         {
-            // TODO: replace the following code with a complete implementation
+            // Done: replace the following code with a complete implementation
             // that will return a single quiz
-
-            ModelState.AddModelError("GetQuiz", "Not Implemented!");
-            return BadRequest(ModelState);
+            try
+            {
+                return (_quizService.Get(id));
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("GetQuiz", "Not Implemented!");
+                return BadRequest(ModelState);
+            }
         }
-
-        // OPTIONAL - PUSH YOURSELF FURTHER
-        // Implement a controller action that will return
-        // a quiz containing five randomly selected questions.
     }
 }
 
