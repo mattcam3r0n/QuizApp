@@ -30,6 +30,8 @@ namespace QuizApp.ApiModels
                 QuestionId = answerModel.QuestionId,
                 Content = answerModel.Content,
                 IsCorrect = answerModel.IsCorrect,
+
+                //push experiment
 			};
 		}
 
