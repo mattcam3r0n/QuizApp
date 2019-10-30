@@ -9,19 +9,27 @@ namespace QuizApp.ApiModels
 	public static class AnswerMappingExtensions
 	{
 
-		public static AnswerModel ToApiModel(this Answer item)
+		public static AnswerModel ToApiModel(this Answer answer)
 		{
             // TODO: map domain properties to equivalent ApiModel properties
             return new AnswerModel
-			{
-			};
+            {
+                Id = answer.Id,
+                QuestionId = answer.QuestionId,
+                Content = answer.Content,
+                IsCorrect = answer.IsCorrect,
+            };
 		}
 
-		public static Answer ToDomainModel(this AnswerModel item)
+		public static Answer ToDomainModel(this AnswerModel answerModel)
 		{
             // TODO: map ApiModel properties to equivalen domain properties
 			return new Answer
 			{
+                Id = answerModel.Id,
+                QuestionId = answerModel.QuestionId,
+                Content = answerModel.Content,
+                IsCorrect = answerModel.IsCorrect,
 			};
 		}
 

@@ -3,6 +3,10 @@ namespace QuizApp.ApiModels
 {
     public class AnswerModel
     {
-        // TODO: create answer model props
+        // : create answer model props
+        int Id { get; set; }
+        int QuestionId { get; set; }
+        string Content { get; set; }
+        bool IsCorrect { get; set; }
     }
 }
