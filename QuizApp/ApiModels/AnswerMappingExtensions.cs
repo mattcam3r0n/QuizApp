@@ -11,7 +11,7 @@ namespace QuizApp.ApiModels
 
 		public static AnswerModel ToApiModel(this Answer answer)
 		{
-            // TODO: map domain properties to equivalent ApiModel properties
+            // : map domain properties to equivalent ApiModel properties
             return new AnswerModel
             {
                 Id = answer.Id,
@@ -23,7 +23,7 @@ namespace QuizApp.ApiModels
 
 		public static Answer ToDomainModel(this AnswerModel answerModel)
 		{
-            // TODO: map ApiModel properties to equivalen domain properties
+            // : map ApiModel properties to equivalen domain properties
 			return new Answer
 			{
                 Id = answerModel.Id,
