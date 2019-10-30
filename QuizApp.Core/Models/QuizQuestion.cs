@@ -3,9 +3,9 @@ namespace QuizApp.Core.Models
 {
     public class QuizQuestion
     {
-        int QuizId { get; set; }
-        Quiz Quiz { get; set; }
-        int QuestionId { get; set; }
-        Question Question { get; set; }
+        public int QuizId { get; set; }
+        public Quiz Quiz { get; set; }
+        public int QuestionId { get; set; }
+        public Question Question { get; set; }
     }
 }
