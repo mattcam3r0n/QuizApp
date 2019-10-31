@@ -30,6 +30,8 @@ namespace QuizApp
             services.AddDbContext<AppDbContext>();
 
             // TODO: register repositories and services
+            //services.AddScoped<IQuestionService, QuestionService>();
+            
 
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>();
