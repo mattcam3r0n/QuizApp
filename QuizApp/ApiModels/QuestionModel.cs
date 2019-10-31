@@ -10,5 +10,6 @@ namespace QuizApp.ApiModels
         public string QuestionType { get; set; }
         public string Prompt { get; set; }
         public IEnumerable<AnswerModel> Answers { get; set; }
+
     }
 }
