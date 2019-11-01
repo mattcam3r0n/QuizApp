@@ -37,6 +37,7 @@ namespace QuizApp
 
             services.AddScoped<IQuestionRepository>();
 
+
             services.AddScoped<IQuizRepository>();
 
             services.AddIdentity<User, IdentityRole>()
