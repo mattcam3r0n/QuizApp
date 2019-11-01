@@ -5,9 +5,25 @@ using QuizApp.Core.Models;
 
 namespace QuizApp.Core.Services
 {
-    public class QuizService 
+    public class QuizService : IQuizService
     {
         // TODO: inherit and implement the IQuizService interface
+        private readonly IQuizRepository _quizRepository;
+
+        public QuizService(IQuizRepository quizRepository)
+        {
+            _quizRepository = quizRepository;
+        }
+
+        public Quiz Get(int id)
+        {
+            return _quizRepository.Get(id);
+        }
+
+        public IEnumerable<Quiz> GetAll()
+        {
+            return _quizRepository.GetAll();
+        }
 
         // PUSH YOURSELF FURTHER
         // TIPS:

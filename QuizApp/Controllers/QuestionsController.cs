@@ -14,6 +14,11 @@ namespace QuizApp.Controllers
         private readonly IQuestionService _questionService;
 
         // TODO: create a constructor and inject the question service
+        public QuestionsController()
+        {
+            _questionService = questionService;
+        }
+
 
         // TODO: anonymous users can still call this action
         [HttpGet()]
@@ -21,8 +26,13 @@ namespace QuizApp.Controllers
         {
             // TODO: replace the following code with a complete implementation
             // that will return all questions
-            ModelState.AddModelError("GetQuestions", "Not Implemented!");
+            // ModelState.AddModelError("GetQuestions", "Not Implemented!");
+            // return BadRequest(ModelState);
+            return Ok(_questionService.GetAll());
+            ModelState.AddModelError("GetQustions", "Not Implemented!");
             return BadRequest(ModelState);
+
+
         }
 
         // TODO: anonymous users can still call this action
@@ -31,7 +41,12 @@ namespace QuizApp.Controllers
         {
             // TODO: replace the following code with a complete implementation
             // that will return a single question based on id
-            ModelState.AddModelError("GetQuestion", "Not Implemented!");
+            // ModelState.AddModelError("GetQuestion", "Not Implemented!");
+            // return BadRequest(ModelState);
+            var question = _questionService.Get(id);
+            if (question == null) return NotFound();
+            return Ok(question);
+            ModelState.AddModelError("Get Question", "Not Implemented!");
             return BadRequest(ModelState);
         }
 
