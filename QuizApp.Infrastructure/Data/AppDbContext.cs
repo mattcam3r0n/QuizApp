@@ -9,7 +9,11 @@ namespace QuizApp.Infrastructure.Data
     public class AppDbContext : IdentityDbContext<User>
     {
         // NOTE: User DbSet is inherited from IdentityDbContext
+
+        // TODO: add DbSets for Quizzes and Questions
         public DbSet<Quiz> Quizzes { get; set; }
+        public DbSet<Question> Questions { get; set; }
+
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
