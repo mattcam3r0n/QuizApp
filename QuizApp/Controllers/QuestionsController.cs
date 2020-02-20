@@ -70,7 +70,11 @@ namespace QuizApp.Controllers
             // that will update a question
             try
             {
-                return Ok(_questionService.Update(questionModel).ToApiModel());
+                var quiz = _questionService.Update(questionModel.ToDomainModel());
+
+                if (quiz == null) return NotFound();
+
+                return Ok(quiz);
 
             } catch
             {
