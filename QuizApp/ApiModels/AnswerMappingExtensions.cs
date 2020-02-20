@@ -14,6 +14,7 @@ namespace QuizApp.ApiModels
             // TODO: map domain properties to equivalent ApiModel properties
             return new AnswerModel
 			{
+                
 			};
 		}
 

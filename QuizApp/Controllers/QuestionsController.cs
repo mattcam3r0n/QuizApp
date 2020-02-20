@@ -7,15 +7,20 @@ using QuizApp.Core.Services;
 
 namespace QuizApp.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class QuestionsController : Controller
     {
 
         private readonly IQuestionService _questionService;
 
-        // TODO: create a constructor and inject the question service
+        public QuestionsController(IQuestionService questionService)
+        {
+            _questionService = questionService;
+        }
 
-        // TODO: anonymous users can still call this action
+
+        [AllowAnonymous]
         [HttpGet()]
         public IActionResult GetAll()
         {
@@ -25,14 +30,26 @@ namespace QuizApp.Controllers
             return BadRequest(ModelState);
         }
 
-        // TODO: anonymous users can still call this action
+        [AllowAnonymous]
         [HttpGet("{id}")]
-        public IActionResult Get()
+        public IActionResult Get(int id)
         {
             // TODO: replace the following code with a complete implementation
             // that will return a single question based on id
-            ModelState.AddModelError("GetQuestion", "Not Implemented!");
-            return BadRequest(ModelState);
+            try
+            {
+                var quiz = _questionService.Get(id);
+
+                if (quiz == null) return NotFound();
+
+                return Ok(quiz.ToApiModel());
+
+            } catch
+            {
+                ModelState.AddModelError("GetQuestion", "Not Implemented!");
+                            return BadRequest(ModelState);
+            }
+            
         }
 
         // TODO: only authenticated users can call this action
@@ -51,8 +68,20 @@ namespace QuizApp.Controllers
         {
             // TODO: replace the following code with a complete implementation
             // that will update a question
-            ModelState.AddModelError("UpdateQuestion", "Not Implemented!");
-            return BadRequest(ModelState);
+            try
+            {
+                var quiz = _questionService.Update(questionModel.ToDomainModel());
+
+                if (quiz == null) return NotFound();
+
+                return Ok(quiz);
+
+            } catch
+            {
+                ModelState.AddModelError("UpdateQuestion", "Not Implemented!");
+                            return BadRequest(ModelState);
+            }
+            
         }
 
         // TODO: only authenticated users can call this action
