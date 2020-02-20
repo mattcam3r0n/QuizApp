@@ -18,6 +18,7 @@ namespace QuizApp.ApiModels
             // Answers
             return new QuestionModel
             {
+				Id = item
                 // HINT: Answers = item.Answers?.ToApiModels().ToList()
             };
         }
