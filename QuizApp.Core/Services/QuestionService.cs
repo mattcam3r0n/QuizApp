@@ -5,8 +5,38 @@ using QuizApp.Core.Models;
 
 namespace QuizApp.Core.Services
 {
-    public class QuestionService 
+    public class QuestionService : IQuestionService
     {
-        // TODO: Inherit and implement the IQuestionService interface
+        private readonly IQuestionService _questionService;
+
+        public QuestionService(IQuestionService questionService)
+        {
+            _questionService = questionService;
+        }
+
+        public Question Add(Question newQuestion)
+        {
+            return _questionService.Add(newQuestion);
+        }
+
+        public Question Get(int id)
+        {
+            return _questionService.Get(id);
+        }
+
+        public IEnumerable<Question> GetAll()
+        {
+            return _questionService.GetAll();
+        }
+
+        public void Remove(int id)
+        {
+            _questionService.Remove(id);
+        }
+
+        public Question Update(Question updatedQuestion)
+        {
+            return _questionService.Update(updatedQuestion);
+        }
     }
 }
