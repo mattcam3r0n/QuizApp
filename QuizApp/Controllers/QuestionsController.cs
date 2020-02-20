@@ -47,9 +47,9 @@ namespace QuizApp.Controllers
             } catch
             {
                 ModelState.AddModelError("GetQuestion", "Not Implemented!");
-                            return BadRequest(ModelState);
+                return BadRequest(ModelState);
             }
-            
+
         }
 
         // TODO: only authenticated users can call this action
@@ -79,19 +79,28 @@ namespace QuizApp.Controllers
             } catch
             {
                 ModelState.AddModelError("UpdateQuestion", "Not Implemented!");
-                            return BadRequest(ModelState);
+                return BadRequest(ModelState);
             }
-            
+
         }
 
         // TODO: only authenticated users can call this action
-        [HttpDelete]
-        public IActionResult Remove()
+        [HttpDelete("{id}")]
+        public IActionResult Remove(int id)
         {
             // TODO: replace the following code with a complete implementation
             // that will delete a question
-            ModelState.AddModelError("RemoveQuestion", "Not Implemented!");
-            return BadRequest(ModelState);
+            try
+            {
+                _questionService.Remove(id);
+
+                return Ok();
+            } catch
+            {
+                ModelState.AddModelError("RemoveQuestion", "Not Implemented!");
+                            return BadRequest(ModelState);
+            }
+            
         }
     }
 }
