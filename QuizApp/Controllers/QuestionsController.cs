@@ -32,12 +32,24 @@ namespace QuizApp.Controllers
 
         [AllowAnonymous]
         [HttpGet("{id}")]
-        public IActionResult Get()
+        public IActionResult Get(int id)
         {
             // TODO: replace the following code with a complete implementation
             // that will return a single question based on id
-            ModelState.AddModelError("GetQuestion", "Not Implemented!");
-            return BadRequest(ModelState);
+            try
+            {
+                var quiz = _questionService.Get(id);
+
+                if (quiz == null) return NotFound();
+
+                return Ok(quiz.ToApiModel());
+
+            } catch
+            {
+                ModelState.AddModelError("GetQuestion", "Not Implemented!");
+                            return BadRequest(ModelState);
+            }
+            
         }
 
         // TODO: only authenticated users can call this action
