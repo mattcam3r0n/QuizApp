@@ -7,13 +7,41 @@ using QuizApp.Core.Services;
 
 namespace QuizApp.Infrastructure.Data
 {
-    public class QuestionRepository 
+    public class QuestionRepository : IQuestionRepository
     {
         // TODO: inherit and implement the IQuestionRepository interface
 
-        public QuestionRepository() 
+        private readonly AppDbContext _appDbContext;
+
+        public QuestionRepository(AppDbContext appDbContext) 
         {
             // TODO: inject and store AppDbContext
+            _appDbContext = appDbContext;
+        }
+
+        public Question Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Question> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Question Add(Question newQuestion)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Question Update(Question updatedQuestion)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Remove(Question question)
+        {
+            throw new NotImplementedException();
         }
 
         // TODO: The Update() method needs some special logic that you have not seen before.
