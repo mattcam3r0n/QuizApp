@@ -7,15 +7,20 @@ using QuizApp.Core.Services;
 
 namespace QuizApp.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class QuestionsController : Controller
     {
 
         private readonly IQuestionService _questionService;
 
-        // TODO: create a constructor and inject the question service
+        public QuestionsController(IQuestionService questionService)
+        {
+            _questionService = questionService;
+        }
 
-        // TODO: anonymous users can still call this action
+
+        [AllowAnonymous]
         [HttpGet()]
         public IActionResult GetAll()
         {
@@ -25,7 +30,7 @@ namespace QuizApp.Controllers
             return BadRequest(ModelState);
         }
 
-        // TODO: anonymous users can still call this action
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public IActionResult Get()
         {
@@ -51,8 +56,16 @@ namespace QuizApp.Controllers
         {
             // TODO: replace the following code with a complete implementation
             // that will update a question
-            ModelState.AddModelError("UpdateQuestion", "Not Implemented!");
-            return BadRequest(ModelState);
+            try
+            {
+                return Ok(_questionService.Update(questionModel).ToApiModel());
+
+            } catch
+            {
+                ModelState.AddModelError("UpdateQuestion", "Not Implemented!");
+                            return BadRequest(ModelState);
+            }
+            
         }
 
         // TODO: only authenticated users can call this action

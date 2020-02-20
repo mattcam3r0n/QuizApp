@@ -13,6 +13,10 @@ namespace QuizApp.Controllers
         private readonly IQuizService _quizService;
 
         // TODO: create a constructor and inject quiz service
+        public QuizzesController(IQuizService quizService)
+        {
+            _quizService = quizService;
+        }
 
         [HttpGet()]
         public IActionResult GetQuizzes()
@@ -28,8 +32,19 @@ namespace QuizApp.Controllers
         {
             // TODO: replace the following code with a complete implementation
             // that will return a single quiz
-            ModelState.AddModelError("GetQuiz", "Not Implemented!");
-            return BadRequest(ModelState);
+            try
+            {
+                var quiz = _quizService.Get(id);
+
+                if (quiz == null) return NotFound();
+
+                return Ok(quiz.ToApiModel());
+
+            } catch
+            {
+                ModelState.AddModelError("GetQuiz", "Not Implemented!");
+                return BadRequest(ModelState);
+            }
         }
 
         // OPTIONAL - PUSH YOURSELF FURTHER
