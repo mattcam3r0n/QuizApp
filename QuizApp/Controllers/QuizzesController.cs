@@ -17,17 +17,26 @@ namespace QuizApp.Controllers
         [HttpGet]
         public IActionResult GetQuizzes()
         {
-            var allQuizzes = _quizService
-                            .GetAll()
-                            .ToApiModels();
-            return Ok(allQuizzes);
+            try
+            {
+                var allQuizzes = _quizService
+                                    .GetAll()
+                                    .ToApiModels();
+
+                if (allQuizzes == null) return NotFound();
+
+                return Ok(allQuizzes);
+            } catch
+            {
+                ModelState.AddModelError("GetQuiz", "Not Implemented!");
+                return BadRequest(ModelState);
+            }
+            
         }
 
         [HttpGet("{id}")]
         public IActionResult GetQuiz(int id)
         {
-            // TODO: replace the following code with a complete implementation
-            // that will return a single quiz
             try
             {
                 var quiz = _quizService.Get(id);
