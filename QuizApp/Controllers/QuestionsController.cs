@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
@@ -24,10 +25,17 @@ namespace QuizApp.Controllers
         [HttpGet()]
         public IActionResult GetAll()
         {
-            // TODO: replace the following code with a complete implementation
-            // that will return all questions
-            ModelState.AddModelError("GetQuestions", "Not Implemented!");
-            return BadRequest(ModelState);
+            // return all questions
+            try
+            {
+                return Ok(_questionService.GetAll().ToApiModels());
+            }
+            catch(Exception ex)
+            {
+                ModelState.AddModelError("GetQuestions", ex.Message);
+                return BadRequest(ModelState);
+            } 
+           
         }
 
         [AllowAnonymous]
