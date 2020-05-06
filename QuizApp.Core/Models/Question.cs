@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace QuizApp.Core.Models
 {
-
     public class Question 
     {
         public int Id { get; set; }
