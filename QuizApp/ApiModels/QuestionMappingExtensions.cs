@@ -6,44 +6,29 @@ using QuizApp.Core.Models;
 
 namespace QuizApp.ApiModels
 {
-	public static class QuestionMappingExtensions
-	{
-
-		public static QuestionModel ToApiModel(this Question item)
-		{
-            // TODO: map domain properties to equivalent apiModel properties
-            // Id
-            // QuestionType
-            // Prompt
-            // Answers
-            return new QuestionModel
+    public static class QuestionMappingExtensions
+    {
+        public static QuestionModel ToApiModel(this Question item) =>
+            new QuestionModel
             {
-                // HINT: Answers = item.Answers?.ToApiModels().ToList()
+                Id = item.Id,
+                QuestionType = item.QuestionType,
+                Prompt = item.Prompt,
+                Answers = item.Answers?.ToApiModels()
             };
-        }
 
-		public static Question ToDomainModel(this QuestionModel item)
-		{
-            // TODO: map api model props to equivalent domain props
-            // Id
-            // QuestionType
-            // Prompt
-            // Answers
-			return new Question
-			{
-                // HINT: Answers is similar to above, but uses Domain Models
-                // HINT: you can ignore QuizQuestions
-			};
-		}
+        public static Question ToDomainModel(this QuestionModel item) =>
+            new Question
+            {
+                Id = item.Id,
+                QuestionType = item.QuestionType,
+                Prompt = item.Prompt,
+                Answers = null,
+                QuizQuestions = null
+            };
 
-		public static IEnumerable<QuestionModel> ToApiModels(this IEnumerable<Question> items)
-		{
-			return items.Select(a => a.ToApiModel());
-		}
+        public static IEnumerable<QuestionModel> ToApiModels(this IEnumerable<Question> items) => items.Select(a => a.ToApiModel());
 
-		public static IEnumerable<Question> ToDomainModels(this IEnumerable<QuestionModel> items)
-		{
-			return items.Select(a => a.ToDomainModel());
-		}
-	}
+        public static IEnumerable<Question> ToDomainModels(this IEnumerable<QuestionModel> items) => items.Select(a => a.ToDomainModel());
+    }
 }
