@@ -9,8 +9,6 @@ namespace QuizApp.ApiModels
         public int Id { get; set; }
         public string QuestionType { get; set; }
         public string Prompt { get; set; }
-        public ICollection<Answer> Answers { get; set; }
-        ///If you need this:
-        //public ICollection<QuizQuestion> QuizQuestions { get; set; }
+        public IEnumerable<Answer> Answers { get; set; }
     }
 }
