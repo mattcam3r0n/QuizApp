@@ -8,20 +8,19 @@ namespace QuizApp.Infrastructure.Data
 {
     public class AppDbContext : IdentityDbContext<User>
     {
-        // NOTE: User DbSet is inherited from IdentityDbContext
         public DbSet<Quiz> Quizzes { get; set; }
         public DbSet<Question> Questions { get; set; }
-
-
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            base.OnConfiguring(optionsBuilder);
-
             optionsBuilder.UseSqlite("Data Source=../QuizApp.Infrastructure/quizapp.db");
+            base.OnConfiguring(optionsBuilder);
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<QuizQuestion>()
+                .HasKey(qt => new {qt.QuizId, qt.QuestionId});
             base.OnModelCreating(builder);
         }
 
